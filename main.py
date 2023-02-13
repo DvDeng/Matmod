@@ -1,9 +1,8 @@
 import math
 from queue import PriorityQueue
 
-class Order:
-    def __init__(self, items):
-        self.items = items
+time_to_get = [1 + 0.01 * x for x in range(1000)]
+
 
 
 class Arrival:
@@ -30,9 +29,7 @@ event_queue.put((2,order))
 
 
 
-time_to_get = [60+0.6*x for x in range(1000)]
 
-#nån fördelning av tid att hämta varor
 
 
 
