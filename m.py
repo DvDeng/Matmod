@@ -1,4 +1,5 @@
 import random
+import matplotlib.pyplot as plt
 
 
 class Order:
@@ -42,6 +43,11 @@ for i in range(n):
 
 # Use the probabilities to sample 20 items from the time_to_get list
 pareto_sample = sorted(set(sample_pareto(probabilities, nbrItemsInOrder)))
+sample = [sample_pareto(probabilities, 1000)]
 
 print(nbrItemsInOrder)
 print(pareto_sample)
+plt.hist(sample, bins=n, density=True, cumulative=False)
+print(sample)
+
+plt.show()
