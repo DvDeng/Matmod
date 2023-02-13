@@ -27,8 +27,10 @@ def sample_pareto(probabilities, k):
 
 time_to_get = [1 + 0.01 * x for x in range(1000)]
 
+nbrItemsInOrder=  random.randint(1, 20)
 
-def nbrItemsInOrder():
+    
+    
 
     # Generate a list of probabilities that follow the Pareto distribution
 n = len(time_to_get)
@@ -36,7 +38,9 @@ alpha = 1.16
 probabilities = [0] * n
 for i in range(n):
     probabilities[i] = (i + 1) ** (-alpha) / sum(j ** (-alpha)
-                                                 for j in range(1, n + 1))
+                                                for j in range(1, n + 1))
 
 # Use the probabilities to sample 20 items from the time_to_get list
 pareto_sample = sample_pareto(probabilities, nbrItemsInOrder)
+
+print(nbrItemsInOrder)
