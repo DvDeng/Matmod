@@ -41,7 +41,7 @@ for i in range(n):
                                                 for j in range(1, n + 1))
 
 # Use the probabilities to sample 20 items from the time_to_get list
-pareto_sample = set(sample_pareto(probabilities, nbrItemsInOrder))
+pareto_sample = sorted(set(sample_pareto(probabilities, nbrItemsInOrder)))
 
 print(nbrItemsInOrder)
 print(pareto_sample)
