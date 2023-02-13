@@ -48,6 +48,6 @@ sample = [sample_pareto(probabilities, 1000)]
 print(nbrItemsInOrder)
 print(pareto_sample)
 plt.hist(sample, bins=n, density=True, cumulative=False)
-print(sample)
+
 
 plt.show()
