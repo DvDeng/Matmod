@@ -1,6 +1,7 @@
 import math
 from queue import PriorityQueue
 
+time_to_get = [1 + 0.01 * x for x in range(1000)]
 
 
 class Station:
