@@ -1,3 +1,4 @@
+from queue import PriorityQueue
 import random
 import matplotlib.pyplot as plt
 random.seed(1)
@@ -51,3 +52,12 @@ plt.hist(sample, bins=n, density=True, cumulative=False)
 
 
 plt.show()
+
+def generate_order_queue():
+    order_queue = PriorityQueue() #contains tuples on the form (time, order)
+    #lägg till element
+    return order_queue
+
+def generate_time_to_get_list():
+    time_to_get = []
+    return time_to_get()
