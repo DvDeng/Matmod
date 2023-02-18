@@ -4,13 +4,19 @@ from m import Order
 import m
 from random import randint
 
-#time_to_get = [1 + 0.01 * x for x in range(1000)]
-time_to_get = m.generate_time_to_get_list()
 
-class Arrival:
+
+
+time_to_get = [15 + 2 * x for x in range(1000)]
+#time_to_get = m.generate_time_to_get_list()
+
+class Arrival(m.Event):
     def __init__(self,item,station):
         self.item=item
         self.station=station
+    
+    def __str__(self):
+        return "item: "+str(self.item)+" station: "+str(stations.index(self.station))
     
 
 class Station:
@@ -20,10 +26,11 @@ class Station:
         self.orders = []
         self.buffers = []
         self.approching_items = []
-
+    
 #event_queue = m.generate_order_queue()
-
-
+event_queue = PriorityQueue()
+for x in range(30):
+    event_queue.put((10*x,Order([x,x+1,x+2])))
 
 #nån loop för att generera ordrar
 
@@ -43,9 +50,15 @@ class Station:
 stations = [Station() for _ in range(10)]
 
 t = 0
-while not event_queue.empty():
+
+
+#while not event_queue.empty():
+ #   (t,event) = event_queue.get()
+  #  print(t,event)
+while not event_queue.empty() and t<200:
     (t, event) = event_queue.get()
-    if event.isinstance(Order):
+    print(t, event)
+    if isinstance(event, Order):
         items = event.items
         best_station = None
         best_time = 10**9
@@ -60,7 +73,7 @@ while not event_queue.empty():
                 best_time = time
                 best_station = station
         if best_station == None:
-            event_queue.add((t+20,order))
+            event_queue.put((t+20,order))
             continue
 
         for i in range(len(items)-1,-1,-1):
@@ -68,15 +81,17 @@ while not event_queue.empty():
             if items in best_station.buffers:
                 items.remove(item)
             elif item not in best_station.approching_items:
-                event_queue.add((t+time_to_get[item],Arrival(item,station)))
+                event_queue.put((t+time_to_get[item],Arrival(item,station)))
                 best_station.approching_items.append(item)
         
         if len(items)!=0:
-            best_station.orders.append(order)
-            #order done
+            best_station.orders.append(event)
+        else:
+            print(stations.index(station), "done")
 
 
-    if event.isinstance(Arrival):
+
+    if isinstance(event, Arrival):
         Station: station = event.station
         item = event.station
         i=0
@@ -86,11 +101,14 @@ while not event_queue.empty():
                 order.remove(item)
             if len(order.items)==0:
                 station.orders.remove(order)
-                #order done
+                print(stations.index(station), "done")
             i+=1
-        while len(items) >= station.max_buffers:
-            items.remove(randint(0,station.max_buffers))
-        items.append(item)
+        if station.max_buffers>0:
+            while len(items) >= station.max_buffers:
+                items.remove(items[randint(0,station.max_buffers-1)])
+            items.append(item)
+        for order in station.orders:
+            print order.items
 
 
 print("total time:",t)
