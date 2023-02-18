@@ -8,12 +8,12 @@ class Event():
         return True
 
 class Order(Event):
-    def __init__(self, items):
+    def __init__(self, items, times_resent = 0):
         self.items = items
+        self.times_resent = times_resent
     
     def __str__(self):
         return "order items: "+str(self.items)
-
 
 
 # nån fördelning av tid att hämta varor
