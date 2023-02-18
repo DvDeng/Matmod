@@ -7,8 +7,7 @@ from random import randint
 
 
 
-time_to_get = [15 + 2 * x for x in range(1000)]
-#time_to_get = m.generate_time_to_get_list()
+
 
 class Arrival(m.Event):
     def __init__(self,item,station):
@@ -36,6 +35,14 @@ class Station:
     def __str__(self):
         return("station: "+str(self.id))
     
+
+#Tiden det tar att hämta saker:
+time_to_get = [15 + 2 * x for x in range(1000)]
+#time_to_get = m.generate_time_to_get_list()
+
+
+
+#Order Listan
 #event_queue = m.generate_order_queue()
 event_queue = PriorityQueue()
 
@@ -43,8 +50,12 @@ for x in range(40):
     event_queue.put((10*x,Order([x,x+1,x+2])))
 
 
+
+
 #Stationerna
 stations = [Station(1,0) for _ in range(10)]
+
+
 
 
 
