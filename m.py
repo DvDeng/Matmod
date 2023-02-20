@@ -63,18 +63,18 @@ def generate_order_queue():
     order_queue = PriorityQueue() #contains tuples on the form (time, order)
     for i in range(25):
         nbrItems = random.randint(1, 20)
-        orderList = []
-        for i in range(0,5):
-            l = random.randint(1, n)
-            orderList.append(l)
+        orderList = sample_pareto(probabilities, nbrItems)
         order = Order(orderList)
         time = i*20
         order_queue.put((time, order))
 
     #lägg till element
     return order_queue
+q = generate_order_queue()
+while not q.empty():
+    t,o = q.get()
+    print(t,o)
 
-print(generate_order_queue())
 
 def generate_time_to_get_list():
     time_to_get = []
