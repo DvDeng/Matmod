@@ -3,6 +3,8 @@ import random
 #import matplotlib.pyplot as plt
 random.seed(1)
 
+#test
+
 class Event():
     def __lt__ (self,other):
         return True
