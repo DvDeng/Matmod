@@ -26,14 +26,9 @@ def sample_pareto(probabilities, k):
                 break
     return result
 
-
 order_list = [0 + x for x in range(1000)]
 
-nbrItemsInOrder=  random.randint(1, 20)
-
-    
-    
-
+nbrItemsInOrder = random.randint(1, 20)
     # Generate a list of probabilities that follow the Pareto distribution
 n = len(order_list)
 alpha = 1.16
@@ -53,10 +48,23 @@ plt.hist(sample, bins=n, density=True, cumulative=False)
 
 plt.show()
 
+
 def generate_order_queue():
     order_queue = PriorityQueue() #contains tuples on the form (time, order)
+    for i in range(25):
+        nbrItems = random.randint(1, 20)
+        orderList = []
+        for i in range(0,5):
+            l = random.randint(1, n)
+            orderList.append(l)
+        order = Order(orderList)
+        time = i*20
+        order_queue.put((time, order))
+
     #lägg till element
     return order_queue
+
+print(generate_order_queue())
 
 def generate_time_to_get_list():
     time_to_get = []
