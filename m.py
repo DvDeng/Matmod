@@ -36,7 +36,8 @@ def sample_pareto(probabilities, k):
                 break
     return result
 
-order_list = [0 + x for x in range(1000)]
+nbr_unique_items = 1000
+order_list = [0 + x for x in range(nbr_unique_items)]
 
 nbrItemsInOrder = random.randint(1, 20)
     # Generate a list of probabilities that follow the Pareto distribution
@@ -49,7 +50,7 @@ for i in range(n):
 
 # Use the probabilities to sample 20 items from the time_to_get list
 pareto_sample = sorted(set(sample_pareto(probabilities, nbrItemsInOrder)))
-sample = [sample_pareto(probabilities, 1000)]
+sample = [sample_pareto(probabilities, nbr_unique_items)]
 
 print(nbrItemsInOrder)
 print(pareto_sample)
@@ -70,12 +71,21 @@ def generate_order_queue(nbr_orders=25, max_order_size=20):
 
     #lägg till element
     return order_queue
-q = generate_order_queue()
-while not q.empty():
-    t,o = q.get()
-    print(t,o)
+
+#q = generate_order_queue()
+#while not q.empty():
+#    t,o = q.get()
+#    print(t,o)
 
 
 def generate_time_to_get_list():
-    time_to_get = []
-    return time_to_get()
+    #10% most used articles, 1 min retrieval time
+    #30% second most used articles, 3 min retrieval time
+    #60% third most used articles, 7 min retrieval time
+    # time_to_get = [420]*nbr_unique_items
+    time_to_get_10 = [60 for x in range(1*nbr_unique_items//10)]
+    time_to_get_30 = [180 for x in range(3*nbr_unique_items//10)]
+    time_to_get_60 = [420 for x in range(6*nbr_unique_items//10)]
+    time_to_get = time_to_get_10 + time_to_get_30 + time_to_get_60
+    assert(len(time_to_get)==nbr_unique_items)
+    return time_to_get
