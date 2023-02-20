@@ -59,10 +59,10 @@ print(pareto_sample)
 #plt.show()
 
 
-def generate_order_queue():
+def generate_order_queue(nbr_orders=25, max_order_size=20):
     order_queue = PriorityQueue() #contains tuples on the form (time, order)
-    for i in range(25):
-        nbrItems = random.randint(1, 20)
+    for i in range(nbr_orders):
+        nbrItems = random.randint(1, max_order_size)
         orderList = sample_pareto(probabilities, nbrItems)
         order = Order(orderList)
         time = i*20
