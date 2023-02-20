@@ -1,11 +1,21 @@
 from queue import PriorityQueue
 import random
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 random.seed(1)
 
-class Order:
-    def __init__(self, items):
+#test
+
+class Event():
+    def __lt__ (self,other):
+        return True
+
+class Order(Event):
+    def __init__(self, items, times_resent = 0):
         self.items = items
+        self.times_resent = times_resent
+    
+    def __str__(self):
+        return "order items: "+str(self.items)
 
 
 # nån fördelning av tid att hämta varor
@@ -43,10 +53,10 @@ sample = [sample_pareto(probabilities, 1000)]
 
 print(nbrItemsInOrder)
 print(pareto_sample)
-plt.hist(sample, bins=n, density=True, cumulative=False)
+#plt.hist(sample, bins=n, density=True, cumulative=False)
 
 
-plt.show()
+#plt.show()
 
 
 def generate_order_queue():
