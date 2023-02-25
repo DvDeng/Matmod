@@ -60,7 +60,8 @@ print(pareto_sample)
 #plt.show()
 
 
-def generate_order_queue(nbr_orders=25, max_order_size=20):
+def generate_order_queue(nbr_orders=25, max_order_size=20, seed=1):
+    random.seed(seed)
     order_queue = PriorityQueue() #contains tuples on the form (time, order)
     for i in range(nbr_orders):
         nbrItems = random.randint(1, max_order_size)
