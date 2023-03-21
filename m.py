@@ -68,14 +68,14 @@ def generate_order_queue(nbr_orders=25, max_order_size=20, seed=1):
         probabilitiesNbrItems[i] = (i + 1) ** (-alpha) / sum(j ** (-alpha)
                                                 for j in range(1, max_order_size + 1))
 
-    order_queue = PriorityQueue() #contains tuples on the form (time, order)
+    order_queue = [] #contains tuples on the form (time, order)
     for i in range(nbr_orders):
         #nbrItems = random.randint(1, max_order_size)
         nbrItems = sample_pareto(probabilitiesNbrItems, 1)
         orderList = sample_pareto(probabilities, nbrItems[0]+1)
         order = Order(orderList)
         time = i*20
-        order_queue.put((time, order))
+        order_queue.append((time, order))
 
     #lägg till element
     return order_queue
