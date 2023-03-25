@@ -52,23 +52,20 @@ for i in range(n):
 pareto_sample = sorted(set(sample_pareto(probabilities, nbrItemsInOrder)))
 sample = [sample_pareto(probabilities, nbr_unique_items)]
 
-print(nbrItemsInOrder)
-print(pareto_sample)
+#print(nbrItemsInOrder)
+#print(pareto_sample)
 #plt.hist(sample, bins=n, density=True, cumulative=False)
 
 
 #plt.show()
 
-
 def generate_order_queue(nbr_orders=25, max_order_size=20, seed=1):
     random.seed(seed)
-    order_queue = PriorityQueue() #contains tuples on the form (time, order)
+    order_queue = [] #contains orders in the form of lists of requested items
     for i in range(nbr_orders):
         nbrItems = random.randint(1, max_order_size)
         orderList = sample_pareto(probabilities, nbrItems)
-        order = Order(orderList)
-        time = i*20
-        order_queue.put((time, order))
+        order_queue.append(orderList)
 
     #lägg till element
     return order_queue
