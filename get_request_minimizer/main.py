@@ -1,9 +1,9 @@
 from generators import generate_order_queue
-buffer_max = 3
-parallel_orders = 3
+
 order_count = 10000
 
-def handle(order_list,look_ahead=20):
+
+def handle(order_list,buffer_max,parallel_orders,look_ahead=20):
     
     buffer = [-1]*buffer_max
     get_count=0
@@ -54,12 +54,24 @@ def handle(order_list,look_ahead=20):
     #print("get_count:",get_count)
     return get_count
 
+def mean(l):
+    return sum(l)/len(l)
 
-order_list = list(map(sorted,generate_order_queue(nbr_orders=10000)))
-#print(order_list)
-print("Buffer Max:",buffer_max,"\nParallel orders:",parallel_orders,"\nOrder count:",10000)
-print("Random:", handle([x.copy() for x in order_list]))
-print("Sort:", handle(sorted(order_list)))
+def test(buffer_cap,order_cap,orders=10000):
+    random_results = []
+    sorted_results = []
+    for i in range(10):
+        print(i)
+        order_list = list(map(sorted,generate_order_queue(nbr_orders=orders,seed=i)))
+        #print(order_list)
+        #print("Buffer Max:",buffer_max,"\nParallel orders:",parallel_orders,"\nOrder count:",10000)
+        #print("Random:", handle([x.copy() for x in order_list],buffer_cap,order_cap))
+        #print("Sort:", handle(sorted(order_list)))
+        random_results.append(handle([x.copy() for x in order_list],buffer_cap,order_cap))
+        sorted_results.append(handle(sorted(order_list),buffer_cap,order_cap))
+    return (mean(random_results),mean(sorted_results))
+
+print(test(3,3))
 
 
 
