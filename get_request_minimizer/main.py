@@ -14,7 +14,7 @@ def handle(order_list,buffer_max,parallel_orders,look_ahead=20):
     while curr_orders:
         next_order=[]
         while i<len(order_list) and not next_order:
-            next_order = order_list[i]
+            next_order = set(order_list[i])
             i+=1
         
             for buffered_item in buffer:
@@ -28,7 +28,7 @@ def handle(order_list,buffer_max,parallel_orders,look_ahead=20):
         
 
         while curr_orders[0]:
-            item = curr_orders[0][0]
+            item = curr_orders[0].pop()
 
             first_seen = [10**9]*len(buffer)
             #print(item)

@@ -61,9 +61,16 @@ sample = [sample_pareto(probabilities, nbr_unique_items)]
 
 def generate_order_queue(nbr_orders=25, max_order_size=20, seed=1):
     random.seed(seed)
+
+    alpha = 1.16
+    probs = [0] * max_order_size
+    for i in range(max_order_size):
+        probs[i] = (i + 1) ** (-alpha) / sum(j ** (-alpha)
+                                                for j in range(1, max_order_size + 1))
+    probs = [0]+probs
     order_queue = [] #contains orders in the form of lists of requested items
-    for i in range(nbr_orders):
-        nbrItems = random.randint(1, max_order_size)
+    
+    for nbrItems in sample_pareto(probs, nbr_orders):
         orderList = sample_pareto(probabilities, nbrItems)
         order_queue.append(orderList)
 
